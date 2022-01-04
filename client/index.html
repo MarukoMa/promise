@@ -9,22 +9,48 @@
 </head>
 <body>
     <h1>promise封装</h1>
-    <div id="showCont">sssss</div>
+    <div id="showCont"></div>
     <script src="../common/promise.js"></script>
     <script>
          let objectTest = new Promise((resolve, reject) => {
-             setTimeout(()=>{
-                reject('333')
-             },1000)
-            // resolve('ddd')
+            //  setTimeout(()=>{
+            //    resolve('success')
+            //  },1000)
+            throw 'ERR'
+            throw 'EEEEE'
          })
          const result =  objectTest.then((val)=>{
-             return new Promise((resolve,reject)=>{})
-         },(err)=>{
-            console.log(err)
+             return new Promise((resolve,reject)=>{
+               console.log(111)
+                resolve('success!')
+                return 22
+             })
+         },(reson)=>{
+            return new Promise((resolve,reject)=>{
+             let rr =  reject('err!')
+             })
+         }).catch((e)=>{
+            console.log(e)
          })
          console.log(objectTest,'66')
          console.log(result,'22')
+
+
+         let p1 = new Promise((resolve, reject) => {
+            resolve('成功了')
+         })
+
+         let p2 = new Promise((resolve, reject) => {
+            resolve('success')
+         })
+
+         let p3 = Promise.reject('失败')
+
+         Promise.all([p1, p2]).then((result) => {
+            console.log(result)               //['成功了', 'success']
+         }).catch((error) => {
+            console.log(error)
+         })
     </script>
 </body>
 </html>
